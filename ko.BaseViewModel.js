@@ -13,6 +13,9 @@
         // object to observe form for creating new item
         self.newItem = {};
 
+        // (optional) resets newItem properties to default (empty) values
+        self.resetNewItem = function () { };
+
         // list of dirty (changed) items
         self.dirtyItems = ko.computed(function () {
 	        return self.items().filter(function (item) {
