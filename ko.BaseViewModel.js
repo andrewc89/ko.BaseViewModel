@@ -35,21 +35,28 @@
         // and call self.save if valid
         self.addItem = function () { };
 
-        // saves item to server
+        // saves item to server via POST
         self.save = function (item, url, success) {
             $.ajax({
                 type: "post",
-                data: item,
+                data: JSON.stringify(item),
+                contentType: "application/json, charset=utf-8",
+                traditional: true,
+                datatype: "json",
                 url: self.domain + url,
                 success: success,
                 error: self.error
             });
         };
 
+        // updates an item on the server via PUT
         self.update = function (item, url, success) {
             $.ajax({
                 type: "put",
-                data: item,
+                data: JSON.stringify(item),
+                contentType: "application/json, charset=utf-8",
+                traditional: true,
+                datatype: "json",
                 url: self.domain + url,
                 success: success,
                 error: self.error
@@ -108,7 +115,7 @@
             $.ajax({
                 type: "delete",
                 url: self.domain + url,
-                data: { id: item.id },
+                data: item ? { id: item.id } : {},
                 success: success,
                 error: self.error
             });
